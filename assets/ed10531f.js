@@ -60,9 +60,9 @@ function VigilV3(){
       {window.__resources.logoHome && (
         <img src={window.__resources.logoHome} aria-hidden style={{
           position:'absolute', left:'50%', top:'46%',
-          width:'min(28vw, 260px)', height:'min(28vw, 260px)',
+          width:224, height:224,
           transform:'translate(-50%, -50%)', pointerEvents:'none',
-          opacity:0.25, objectFit:'contain'
+          opacity:0.025, objectFit:'contain'
         }} alt=""/>
       )}
 
