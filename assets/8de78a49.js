@@ -3,6 +3,27 @@ const { useInView, useScrollProgress, useStickyProgress } = window.ReliquaryHook
 const { useElementScroll, usePageProgress, useScrollVelocity, useActiveSection, ScrollLines } = window.ReliquaryMotion;
 const { Reveal, LineReveal, WordsReveal, Rule, Eyebrow, PressMark } = window.ReliquaryAtoms;
 
+const ISSUE_LINKS = {
+  1: "https://thescifi.net/collections/infinite-odyssey-magazine/products/copy-of-infinite-odyssey-magazine-issue-1-digital",
+  2: "https://thescifi.net/collections/infinite-odyssey-magazine/products/copy-of-infinite-odyssey-magazine-issue-2-digital",
+  3: "https://thescifi.net/collections/infinite-odyssey-magazine/products/copy-of-infinite-odyssey-magazine-issue-3-digital",
+  4: "https://thescifi.net/collections/infinite-odyssey-magazine/products/copy-of-infinite-odyssey-magazine-issue-4-digital",
+  5: "https://thescifi.net/collections/infinite-odyssey-magazine/products/copy-of-infinite-odyssey-magazine-issue-5-digital",
+  6: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-6-digital_",
+  7: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-7-digital",
+  8: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-8-digital",
+  9: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-9-digital",
+  10: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-10-digital",
+  11: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-11-digital",
+  12: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-12-digital",
+  13: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-13-digital",
+  14: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-14-digital",
+  15: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-15-digital",
+  16: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-16-digital",
+  17: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-17-digital",
+  19: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-digital"
+};
+
 const ISSUES_V2 = [
   { n:19, t:"The Spike Crown",          d:"JUL 2024", img:window.__resources.issue19 },
   { n:18, t:"Saltlight Cathedral",      d:"JUN 2024", img:window.__resources.issue18 },
@@ -679,6 +700,7 @@ function HorizArchive(){
 function ArchiveCover({ item, active }){
   const hueA = (item.n * 37 + 10) % 360;
   const hueB = (item.n * 53 + 200) % 360;
+  const buyLink = ISSUE_LINKS[item.n];
   return (
     <div style={{
       flex:'0 0 auto',
@@ -721,6 +743,25 @@ function ArchiveCover({ item, active }){
           </div>
         )}
       </div>
+      {/* Buy button */}
+      {buyLink && (
+        <a href={buyLink} target="_blank" rel="noopener noreferrer" style={{
+          display:'block', marginTop:12, padding:'8px 12px',
+          fontFamily:'"JetBrains Mono",monospace', fontSize:'clamp(10px, 2vw, 11px)', letterSpacing:'.24em',
+          color:'#0c0805', background:'#d6aa5a', border:'none', textAlign:'center',
+          textDecoration:'none', cursor:'pointer', transition:'all 300ms ease',
+          boxShadow:'0 0 0 1px rgba(214,170,90,.55), 0 8px 16px -4px rgba(214,170,90,.25)',
+          fontWeight:600
+        }} onMouseEnter={(e) => {
+          e.target.style.background = '#e6bb6a';
+          e.target.style.boxShadow = '0 0 0 1px rgba(214,170,90,.75), 0 12px 24px -6px rgba(214,170,90,.4)';
+        }} onMouseLeave={(e) => {
+          e.target.style.background = '#d6aa5a';
+          e.target.style.boxShadow = '0 0 0 1px rgba(214,170,90,.55), 0 8px 16px -4px rgba(214,170,90,.25)';
+        }}>
+          BUY NOW
+        </a>
+      )}
     </div>
   );
 }
