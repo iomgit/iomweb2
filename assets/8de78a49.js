@@ -631,12 +631,15 @@ function HorizArchive(){
       clearTimeout(inactivityTimer);
       isAutoScrolling = true;
       el.style.scrollSnapType = 'none';
+      let pos = el.scrollLeft;
       const scroll = () => {
-        if (isAutoScrolling && el.scrollLeft < el.scrollWidth - el.clientWidth) {
-          el.scrollLeft += 0.96;
+        if (isAutoScrolling && pos < el.scrollWidth - el.clientWidth) {
+          pos += 0.96;
+          el.scrollLeft = Math.round(pos);
           autoScrollRaf = requestAnimationFrame(scroll);
         } else {
           el.style.scrollSnapType = 'x mandatory';
+          isAutoScrolling = false;
         }
       };
       autoScrollRaf = requestAnimationFrame(scroll);
@@ -650,26 +653,51 @@ function HorizArchive(){
       inactivityTimer = setTimeout(startAutoScroll, resumeDelay);
     };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        startAutoScroll();
-      } else {
+    let sectionVisible = false;
+    const checkVisibility = () => {
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const visible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+      if (visible && !sectionVisible) {
+        sectionVisible = true;
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(startAutoScroll, 600);
+      } else if (!visible && sectionVisible) {
+        sectionVisible = false;
         isAutoScrolling = false;
         cancelAnimationFrame(autoScrollRaf);
-        clearTimeout(inactivityTimer); // don't restart when out of view
+        clearTimeout(inactivityTimer);
       }
-    }, { threshold: 0.3 });
+    };
 
-    const onUserInteract = () => stopAutoScroll(4000);
+    // On mobile, only stop auto-scroll on horizontal swipe, not vertical page scroll
+    let touchStartX = 0, touchStartY = 0;
+    const onTouchStart = (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+    const onTouchMove = (e) => {
+      const dx = Math.abs(e.touches[0].clientX - touchStartX);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY);
+      if (dx > dy && dx > 8) stopAutoScroll(4000);
+    };
+    const onMouseDown = () => stopAutoScroll(4000);
 
-    observer.observe(section);
-    el.addEventListener('touchstart', onUserInteract, { passive: true });
-    el.addEventListener('mousedown', onUserInteract);
+    window.addEventListener('scroll', checkVisibility, { passive: true });
+    document.addEventListener('scroll', checkVisibility, { passive: true, capture: true });
+    const visibilityPoll = setInterval(checkVisibility, 500);
+    checkVisibility();
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: true });
+    el.addEventListener('mousedown', onMouseDown);
 
     return () => {
-      observer.unobserve(section);
-      el.removeEventListener('touchstart', onUserInteract);
-      el.removeEventListener('mousedown', onUserInteract);
+      window.removeEventListener('scroll', checkVisibility);
+      document.removeEventListener('scroll', checkVisibility, { capture: true });
+      clearInterval(visibilityPoll);
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('mousedown', onMouseDown);
       isAutoScrolling = false;
       cancelAnimationFrame(autoScrollRaf);
       clearTimeout(inactivityTimer);
