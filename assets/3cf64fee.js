@@ -409,32 +409,35 @@ function Archive(){
    7) CYCLE TWO — CTA / email signup
    ──────────────────────────────────────────────────────────── */
 function CycleTwo(){
+  const [email, setEmail] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+  const submit = (e) => { e.preventDefault(); if (email) setSent(true); };
   return (
-    <section id="cycle-two" style={{position:’relative’, padding:’120px 22px 130px’, textAlign:’center’, overflow:’hidden’}}>
+    <section id="cycle-two" style={{position:'relative', padding:'120px 22px 130px', textAlign:'center', overflow:'hidden'}}>
       {/* halo */}
       <div aria-hidden style={{
-        position:’absolute’, left:’50%’, top:’50%’, width:’min(140vw, 900px)’, aspectRatio:’1/1’,
-        transform:’translate(-50%,-50%)’,
-        background:’radial-gradient(circle, rgba(214,170,90,.22) 0%, rgba(214,170,90,.06) 30%, transparent 60%)’,
-        animation:’haloPulse 9s ease-in-out infinite’, pointerEvents:’none’
+        position:'absolute', left:'50%', top:'50%', width:'min(140vw, 900px)', aspectRatio:'1/1',
+        transform:'translate(-50%,-50%)',
+        background:'radial-gradient(circle, rgba(214,170,90,.22) 0%, rgba(214,170,90,.06) 30%, transparent 60%)',
+        animation:'haloPulse 9s ease-in-out infinite', pointerEvents:'none'
       }}/>
-      <div style={{position:’relative’, maxWidth: 720, margin:’0 auto’}}>
+      <div style={{position:'relative', maxWidth: 720, margin:'0 auto'}}>
         <Reveal style={{marginBottom: 22}}>
           <Eyebrow>CYCLE  ·  II</Eyebrow>
         </Reveal>
         <Reveal delay={120} style={{
-          fontFamily:’"Cormorant Garamond","EB Garamond",serif’,
-          fontSize:’clamp(42px, 11vw, 132px)’, lineHeight:.96, letterSpacing:’-.025em’,
-          fontWeight:400, textWrap:’balance’
+          fontFamily:'"Cormorant Garamond","EB Garamond",serif',
+          fontSize:'clamp(42px, 11vw, 132px)', lineHeight:.96, letterSpacing:'-.025em',
+          fontWeight:400, textWrap:'balance'
         }}>
-          <span style={{display:’block’, color:’rgba(236,225,196,.45)’, textDecoration:’line-through’, textDecorationThickness:’1px’, textDecorationColor:’rgba(214,170,90,.5)’}}>she was silent.</span>
-          <span style={{display:’block’, fontStyle:’italic’, color:’#d6aa5a’, textShadow:’0 0 60px rgba(214,170,90,.4)’}}>she is returning.</span>
+          <span style={{display:'block', color:'rgba(236,225,196,.45)', textDecoration:'line-through', textDecorationThickness:'1px', textDecorationColor:'rgba(214,170,90,.5)'}}>she was silent.</span>
+          <span style={{display:'block', fontStyle:'italic', color:'#d6aa5a', textShadow:'0 0 60px rgba(214,170,90,.4)'}}>she is returning.</span>
         </Reveal>
         <Reveal delay={300} style={{marginTop: 24}}>
           <p style={{
-            fontFamily:’"EB Garamond",serif’, fontStyle:’italic’,
-            fontSize:’clamp(17px, 4.6vw, 22px)’, lineHeight:1.55,
-            color:’rgba(236,225,196,.78)’, textWrap:’pretty’, margin:’0 auto’, maxWidth: 560
+            fontFamily:'"EB Garamond",serif', fontStyle:'italic',
+            fontSize:'clamp(17px, 4.6vw, 22px)', lineHeight:1.55,
+            color:'rgba(236,225,196,.78)', textWrap:'pretty', margin:'0 auto', maxWidth: 560
           }}>
             Issue 20 opens Cycle Two. Stranger, longer, truer. <br/>
             Be the first to receive the carrier&rsquo;s next transmission.
@@ -442,30 +445,42 @@ function CycleTwo(){
         </Reveal>
 
         <Reveal delay={450} style={{marginTop: 40}}>
-          <form action="https://formspree.io/f/xrejwybz" method="POST" style={{
-            display:’flex’, flexWrap:’wrap’, gap: 10, justifyContent:’center’,
-            maxWidth: 480, margin:’0 auto’
-          }}>
-            <input
-              type="email" name="email" required placeholder="your email"
-              style={{
-                flex:’1 1 220px’, minWidth: 0,
-                background:’rgba(12,8,5,.7)’, border:’1px solid rgba(214,170,90,.4)’,
-                color:’#ece1c4’, padding:’15px 18px’,
-                fontFamily:’"EB Garamond",serif’, fontSize:17, fontStyle:’italic’,
-                outline:’none’
-              }}
-            />
-            <button type="submit" style={{
-              flex:’0 0 auto’, padding:’15px 24px’,
-              background:’#d6aa5a’, color:’#0c0805’, border:’none’,
-              fontFamily:’"JetBrains Mono",monospace’, fontSize:11, fontWeight:700, letterSpacing:’.32em’,
-              cursor:’pointer’, position:’relative’, overflow:’hidden’
+          {!sent ? (
+            <form onSubmit={submit} style={{
+              display:'flex', flexWrap:'wrap', gap: 10, justifyContent:'center',
+              maxWidth: 480, margin:'0 auto'
             }}>
-              NOTIFY ME →
-              <span aria-hidden style={{position:’absolute’, inset:0, background:’linear-gradient(120deg, transparent 30%, rgba(255,250,225,.6) 50%, transparent 70%)’, transform:’translateX(-110%)’, animation:’shimmer 5s ease-in-out infinite’, animationDelay:’1s’}}/>
-            </button>
-          </form>
+              <input
+                type="email" required placeholder="your email"
+                value={email} onChange={e=>setEmail(e.target.value)}
+                style={{
+                  flex:'1 1 220px', minWidth: 0,
+                  background:'rgba(12,8,5,.7)', border:'1px solid rgba(214,170,90,.4)',
+                  color:'#ece1c4', padding:'15px 18px',
+                  fontFamily:'"EB Garamond",serif', fontSize:17, fontStyle:'italic',
+                  outline:'none'
+                }}
+              />
+              <button type="submit" style={{
+                flex:'0 0 auto', padding:'15px 24px',
+                background:'#d6aa5a', color:'#0c0805', border:'none',
+                fontFamily:'"JetBrains Mono",monospace', fontSize:11, fontWeight:700, letterSpacing:'.32em',
+                cursor:'pointer', position:'relative', overflow:'hidden'
+              }}>
+                NOTIFY ME →
+                <span aria-hidden style={{position:'absolute', inset:0, background:'linear-gradient(120deg, transparent 30%, rgba(255,250,225,.6) 50%, transparent 70%)', transform:'translateX(-110%)', animation:'shimmer 5s ease-in-out infinite', animationDelay:'1s'}}/>
+              </button>
+            </form>
+          ) : (
+            <div style={{
+              padding:'18px 22px', border:'1px solid rgba(214,170,90,.45)',
+              fontFamily:'"Cormorant Garamond",serif', fontStyle:'italic',
+              fontSize:'clamp(18px, 5vw, 22px)', color:'#d6aa5a',
+              maxWidth: 480, margin:'0 auto', textShadow:'0 0 30px rgba(214,170,90,.3)'
+            }}>
+              ✦ &nbsp; You’re on the list. &nbsp; ✦
+            </div>
+          )}
         </Reveal>
 
         <Reveal delay={600} style={{marginTop: 22, fontFamily:'"JetBrains Mono",monospace', fontSize:'clamp(10.5px, 1vw, 13px)', letterSpacing:'.32em', color:'rgba(236,225,196,.5)'}}>
