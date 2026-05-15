@@ -56,6 +56,16 @@ function VigilV3(){
         ))}
       </div>
 
+      {/* Logo - subtle in center */}
+      <div aria-hidden style={{
+        position:'absolute', left:'50%', top:'46%',
+        width:'min(30vw, 280px)', height:'min(30vw, 280px)',
+        transform:'translate(-50%, -50%)', pointerEvents:'none',
+        backgroundImage:`url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="rgba(214,170,90,0.15)" stroke-width="2"/><text x="100" y="110" text-anchor="middle" font-family="serif" font-size="48" fill="rgba(214,170,90,0.12)">IO</text></svg>')`,
+        backgroundSize:'contain', backgroundPosition:'center', backgroundRepeat:'no-repeat',
+        opacity:0.3
+      }}/>
+
       {/* Slow-orbit ring */}
       <div aria-hidden style={{
         position:'absolute', left:'50%', top:'46%', width: 320, height: 320,
