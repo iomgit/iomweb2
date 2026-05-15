@@ -411,7 +411,17 @@ function Archive(){
 function CycleTwo(){
   const [email, setEmail] = React.useState('');
   const [sent, setSent] = React.useState(false);
-  const submit = (e) => { e.preventDefault(); if (email) setSent(true); };
+  const submit = (e) => {
+    e.preventDefault();
+    if (email) {
+      fetch('https://formspree.io/f/xrejwybz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      }).catch(() => {});
+      setSent(true);
+    }
+  };
   return (
     <section id="cycle-two" style={{position:'relative', padding:'120px 22px 130px', textAlign:'center', overflow:'hidden'}}>
       {/* halo */}
