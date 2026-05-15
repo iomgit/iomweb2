@@ -116,7 +116,7 @@ function VigilV3(){
           color:'rgba(236,225,196,.78)', margin:'10px 0 0', textWrap:'balance'
         }}>
           The World's First<br/>
-          <span style={{color:'#d6aa5a'}}>Fully AI-Generated Sci-Fi Magazine</span>
+          <span style={{color:'#d6aa5a'}}>AI-Generated Magazine</span>
         </p>
       </Reveal>
 
