@@ -621,7 +621,7 @@ function HorizArchive(){
 
       {/* horizontal snap scroller */}
       <div ref={scrollerRef} style={{
-        display:'flex', gap:18, padding:'10px 30vw 10px',
+        display:'flex', gap:18, padding:'10px calc(50% - min(30vw, 120px)) 10px',
         overflowX:'auto', overflowY:'hidden',
         scrollSnapType:'x mandatory',
         scrollbarWidth:'none', WebkitOverflowScrolling:'touch',
