@@ -746,20 +746,28 @@ function ArchiveCover({ item, active }){
       {/* Buy button */}
       {buyLink && (
         <a href={buyLink} target="_blank" rel="noopener noreferrer" style={{
-          display:'block', marginTop:12, padding:'8px 12px',
-          fontFamily:'"JetBrains Mono",monospace', fontSize:'clamp(10px, 2vw, 11px)', letterSpacing:'.24em',
-          color:'#0c0805', background:'#d6aa5a', border:'none', textAlign:'center',
-          textDecoration:'none', cursor:'pointer', transition:'all 300ms ease',
-          boxShadow:'0 0 0 1px rgba(214,170,90,.55), 0 8px 16px -4px rgba(214,170,90,.25)',
-          fontWeight:600
+          display:'block', marginTop:14, padding:'11px 16px',
+          fontFamily:'"EB Garamond",serif', fontSize:'clamp(13px, 2.5vw, 14px)', letterSpacing:'.08em',
+          color:'#d6aa5a', background:'transparent', border:'1px solid rgba(214,170,90,.6)',
+          textAlign:'center', textDecoration:'none', cursor:'pointer',
+          transition:'all 400ms cubic-bezier(.22,.61,.36,1)',
+          fontWeight:400, fontStyle:'italic', position:'relative', overflow:'hidden'
         }} onMouseEnter={(e) => {
-          e.target.style.background = '#e6bb6a';
-          e.target.style.boxShadow = '0 0 0 1px rgba(214,170,90,.75), 0 12px 24px -6px rgba(214,170,90,.4)';
+          e.target.style.background = 'rgba(214,170,90,.08)';
+          e.target.style.borderColor = '#d6aa5a';
+          e.target.style.color = '#e6bb6a';
+          e.target.style.boxShadow = '0 0 20px rgba(214,170,90,.2)';
         }} onMouseLeave={(e) => {
-          e.target.style.background = '#d6aa5a';
-          e.target.style.boxShadow = '0 0 0 1px rgba(214,170,90,.55), 0 8px 16px -4px rgba(214,170,90,.25)';
+          e.target.style.background = 'transparent';
+          e.target.style.borderColor = 'rgba(214,170,90,.6)';
+          e.target.style.color = '#d6aa5a';
+          e.target.style.boxShadow = 'none';
         }}>
-          BUY NOW
+          <span style={{display:'flex', alignItems:'center', justifyContent:'center', gap:6}}>
+            <span style={{fontSize:'1.1em'}}>✦</span>
+            <span>Acquire</span>
+            <span style={{fontSize:'1.1em'}}>✦</span>
+          </span>
         </a>
       )}
     </div>
