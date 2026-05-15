@@ -104,8 +104,8 @@ function VigilV3(){
           fontSize:'clamp(17px, 4vw, 22px)', lineHeight:1.55,
           color:'rgba(236,225,196,.78)', margin:'10px 0 0', textWrap:'balance'
         }}>
-          Cycle One ended at Issue Nineteen.<br/>
-          <span style={{color:'#d6aa5a'}}>Cycle Two will be stranger, longer, truer.</span>
+          The world's first<br/>
+          <span style={{color:'#d6aa5a'}}>fully AI-generated sci-fi magazine</span>
         </p>
       </Reveal>
 
