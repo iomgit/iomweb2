@@ -710,8 +710,15 @@ function ArchiveCover({ item, active }){
       transform: active ? 'scale(1) translateY(0)' : 'scale(.84) translateY(8px)',
       opacity: active ? 1 : 0.5,
       transition:'transform 500ms cubic-bezier(.22,.61,.36,1), opacity 500ms ease',
-      position:'relative'
+      position:'relative',
+      animation:'slideFromLeft 800ms cubic-bezier(.22,.61,.36,1)'
     }}>
+      <style>{`
+        @keyframes slideFromLeft {
+          from { transform: translateX(-100px) scale(.84) translateY(8px); opacity: 0; }
+          to { transform: translateX(0) scale(.84) translateY(8px); opacity: 1; }
+        }
+      `}</style>
       <div style={{
         width:'100%', aspectRatio:'2/3', position:'relative', overflow:'hidden',
         background: item.img
