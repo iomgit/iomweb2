@@ -56,6 +56,16 @@ function VigilV3(){
         ))}
       </div>
 
+      {/* Logo in center */}
+      {window.__resources.logoHome && (
+        <img src={window.__resources.logoHome} aria-hidden style={{
+          position:'absolute', left:'50%', top:'46%',
+          width:'min(28vw, 260px)', height:'min(28vw, 260px)',
+          transform:'translate(-50%, -50%)', pointerEvents:'none',
+          opacity:0.25, objectFit:'contain'
+        }} alt=""/>
+      )}
+
       {/* Slow-orbit ring */}
       <div aria-hidden style={{
         position:'absolute', left:'50%', top:'46%', width: 320, height: 320,
