@@ -18,37 +18,9 @@ Infinite Odyssey is an innovative digital magazine exploring the intersection of
 - **Curated Collections** spanning multiple sci-fi genres and themes
 - **Interactive Features** including progress tracking and archive navigation
 
-## Getting Started
-
-### Prerequisites
-- Node.js 16+
-- npm or yarn
-
-### Installation & Development
-
-```bash
-npm install
-npm run dev
-```
-
-The site will be available at `http://localhost:5500`
-
-## Project Structure
-
-- `/src` — React components and source code
-- `/assets` — Compiled assets and optimized resources
-- `/style.css` — Global styling and responsive design
-
-## Tech Stack
-
-- React + Babel for component rendering
-- Responsive CSS with mobile-first design
-- Static site generation for optimal performance
-- Optimized asset delivery with WOFF2 fonts and WebP images
-
 ## Learn More
 
-Visit [Infinite Odyssey](https://infiniteodyssey.io) to read the full magazine and explore our archives.
+Visit [Infinite Odyssey](https://infiniteodyssey.net) to read the full magazine and explore our archives.
 
 ---
 
