@@ -765,7 +765,7 @@ function ArchiveCover({ item, active }){
         }}>
           <span style={{display:'flex', alignItems:'center', justifyContent:'center', gap:6}}>
             <span style={{fontSize:'1.1em'}}>✦</span>
-            <span>Acquire</span>
+            <span>Buy</span>
             <span style={{fontSize:'1.1em'}}>✦</span>
           </span>
         </a>
