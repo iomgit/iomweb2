@@ -21,6 +21,7 @@ const ISSUE_LINKS = {
   15: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-15-digital",
   16: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-16-digital",
   17: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-17-digital",
+  18: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-issue-18-digital",
   19: "https://thescifi.net/collections/infinite-odyssey-magazine/products/infinite-odyssey-magazine-digital"
 };
 
