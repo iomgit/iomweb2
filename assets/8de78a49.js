@@ -632,7 +632,7 @@ function HorizArchive(){
       el.style.scrollSnapType = 'none';
       const scroll = () => {
         if (isAutoScrolling && el.scrollLeft < el.scrollWidth - el.clientWidth) {
-          el.scrollLeft += 1.2;
+          el.scrollLeft += 0.96;
           autoScrollRaf = requestAnimationFrame(scroll);
         } else if (!isAutoScrolling) {
           el.style.scrollSnapType = 'x mandatory';
