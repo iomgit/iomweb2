@@ -209,7 +209,7 @@ function Relic(){
   const cap = captions[captionIdx];
 
   return (
-    <section ref={ref} style={{position:'relative', minHeight:'130vh'}}>
+    <section ref={ref} style={{position:'relative', minHeight:'110vh'}}>
       <div style={{
         position:'sticky', top:0, height:'100svh',
         display:'flex', alignItems:'center', justifyContent:'center',

@@ -79,7 +79,7 @@ function PressWall(){
 
   return (
     <section id="v-press-wall" data-screen-label="II½ · As Seen On"
-      style={{padding:'80px 22px 90px', maxWidth: 980, margin:'0 auto', position:'relative'}}>
+      style={{padding:'40px 22px 90px', maxWidth: 980, margin:'0 auto', position:'relative'}}>
 
       <div style={{textAlign:'center', marginBottom: 36}}>
         <Reveal style={{marginBottom: 14}}>
