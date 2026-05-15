@@ -629,10 +629,13 @@ function HorizArchive(){
     const startAutoScroll = () => {
       isAutoScrolling = true;
       clearTimeout(inactivityTimer);
+      el.style.scrollSnapType = 'none';
       const scroll = () => {
         if (isAutoScrolling && el.scrollLeft < el.scrollWidth - el.clientWidth) {
           el.scrollLeft += 1.2;
           autoScrollRaf = requestAnimationFrame(scroll);
+        } else if (!isAutoScrolling) {
+          el.style.scrollSnapType = 'x mandatory';
         }
       };
       autoScrollRaf = requestAnimationFrame(scroll);
@@ -641,6 +644,7 @@ function HorizArchive(){
     const stopAutoScroll = () => {
       isAutoScrolling = false;
       cancelAnimationFrame(autoScrollRaf);
+      el.style.scrollSnapType = 'x mandatory';
       inactivityTimer = setTimeout(startAutoScroll, 4000);
     };
 
