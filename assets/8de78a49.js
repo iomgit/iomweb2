@@ -623,51 +623,59 @@ function HorizArchive(){
     const el = scrollerRef.current; if (!el) return;
     const section = el.closest('section');
     let autoScrollRaf = 0;
-    let isAutoScrolling = true;
+    let isAutoScrolling = false;
     let inactivityTimer = 0;
 
     const startAutoScroll = () => {
-      isAutoScrolling = true;
+      cancelAnimationFrame(autoScrollRaf); // prevent duplicate loops
       clearTimeout(inactivityTimer);
+      isAutoScrolling = true;
       el.style.scrollSnapType = 'none';
       const scroll = () => {
         if (isAutoScrolling && el.scrollLeft < el.scrollWidth - el.clientWidth) {
           el.scrollLeft += 0.96;
           autoScrollRaf = requestAnimationFrame(scroll);
-        } else if (!isAutoScrolling) {
+        } else {
           el.style.scrollSnapType = 'x mandatory';
         }
       };
       autoScrollRaf = requestAnimationFrame(scroll);
     };
 
-    const stopAutoScroll = () => {
+    const stopAutoScroll = (resumeDelay = 4000) => {
       isAutoScrolling = false;
       cancelAnimationFrame(autoScrollRaf);
       el.style.scrollSnapType = 'x mandatory';
-      inactivityTimer = setTimeout(startAutoScroll, 4000);
+      clearTimeout(inactivityTimer); // clear any pending restart before scheduling new one
+      inactivityTimer = setTimeout(startAutoScroll, resumeDelay);
     };
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         startAutoScroll();
       } else {
-        stopAutoScroll();
+        isAutoScrolling = false;
+        cancelAnimationFrame(autoScrollRaf);
+        clearTimeout(inactivityTimer); // don't restart when out of view
       }
     }, { threshold: 0.3 });
 
-    const onUserInteract = () => { stopAutoScroll(); };
+    const onUserInteract = () => stopAutoScroll(4000);
+    const onHover = () => stopAutoScroll(2000);
 
     observer.observe(section);
     el.addEventListener('wheel', onUserInteract, { passive: true });
     el.addEventListener('touchstart', onUserInteract, { passive: true });
     el.addEventListener('mousedown', onUserInteract);
+    el.addEventListener('mouseenter', onHover);
 
     return () => {
       observer.unobserve(section);
       el.removeEventListener('wheel', onUserInteract);
       el.removeEventListener('touchstart', onUserInteract);
       el.removeEventListener('mousedown', onUserInteract);
+      el.removeEventListener('mouseenter', onHover);
+      isAutoScrolling = false;
       cancelAnimationFrame(autoScrollRaf);
       clearTimeout(inactivityTimer);
     };
