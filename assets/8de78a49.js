@@ -618,6 +618,57 @@ function HorizArchive(){
     };
   }, []);
 
+  // Auto-scroll carousel when section is in view
+  React.useEffect(() => {
+    const el = scrollerRef.current; if (!el) return;
+    const section = el.closest('section');
+    let autoScrollRaf = 0;
+    let isAutoScrolling = true;
+    let inactivityTimer = 0;
+
+    const startAutoScroll = () => {
+      isAutoScrolling = true;
+      clearTimeout(inactivityTimer);
+      const scroll = () => {
+        if (isAutoScrolling && el.scrollLeft < el.scrollWidth - el.clientWidth) {
+          el.scrollLeft += 1.2;
+          autoScrollRaf = requestAnimationFrame(scroll);
+        }
+      };
+      autoScrollRaf = requestAnimationFrame(scroll);
+    };
+
+    const stopAutoScroll = () => {
+      isAutoScrolling = false;
+      cancelAnimationFrame(autoScrollRaf);
+      inactivityTimer = setTimeout(startAutoScroll, 4000);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        startAutoScroll();
+      } else {
+        stopAutoScroll();
+      }
+    }, { threshold: 0.3 });
+
+    const onUserInteract = () => { stopAutoScroll(); };
+
+    observer.observe(section);
+    el.addEventListener('wheel', onUserInteract, { passive: true });
+    el.addEventListener('touchstart', onUserInteract, { passive: true });
+    el.addEventListener('mousedown', onUserInteract);
+
+    return () => {
+      observer.unobserve(section);
+      el.removeEventListener('wheel', onUserInteract);
+      el.removeEventListener('touchstart', onUserInteract);
+      el.removeEventListener('mousedown', onUserInteract);
+      cancelAnimationFrame(autoScrollRaf);
+      clearTimeout(inactivityTimer);
+    };
+  }, []);
+
   const cur = items[idx];
 
   return (
