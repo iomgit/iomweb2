@@ -661,20 +661,15 @@ function HorizArchive(){
     }, { threshold: 0.3 });
 
     const onUserInteract = () => stopAutoScroll(4000);
-    const onHover = () => stopAutoScroll(2000);
 
     observer.observe(section);
-    el.addEventListener('wheel', onUserInteract, { passive: true });
     el.addEventListener('touchstart', onUserInteract, { passive: true });
     el.addEventListener('mousedown', onUserInteract);
-    el.addEventListener('mouseenter', onHover);
 
     return () => {
       observer.unobserve(section);
-      el.removeEventListener('wheel', onUserInteract);
       el.removeEventListener('touchstart', onUserInteract);
       el.removeEventListener('mousedown', onUserInteract);
-      el.removeEventListener('mouseenter', onHover);
       isAutoScrolling = false;
       cancelAnimationFrame(autoScrollRaf);
       clearTimeout(inactivityTimer);
